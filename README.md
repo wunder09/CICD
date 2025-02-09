@@ -16,4 +16,14 @@
 
 如何管理pod？  -- pod控制器
 
+K8S 的数据存储
 
+
+
+### 监控系统
+
+Prometheus 的安装与监控节点
+
+如何用Grafana 显示所监控的数据？
+
+Prometheus  进阶用法
