@@ -1,0 +1,179 @@
+# Terraform
+
+Terraform 是一个**安全、高效地部署、更改、版本化基础设施和应用程序的工具**，可以用来管理多层次的资源。
+
+从**上层的软件**配置到**底层的网络**、**系统配置**都可以使用 Terraform **统一进行管理**。
+
+## IAC的概念
+
+基础设施即代码（Infrastructure-as-Code，IaC）意味着使用代码来定义和管理基础设施，用户不必在每次开发、测试或部署软件时都配置环境。
+
+所有基础设施参数都以称为清单的文件的形式保存。
+
+
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/21910142/1668738168302-58b3f706-d5fc-49a3-b41e-d8eb17d1064b.png?x-oss-process=image%2Fformat%2Cwebp%2Fresize%2Cw_750%2Climit_0)![image.png](https://cdn.nlark.com/yuque/0/2022/png/21910142/1668679016488-c1fba14c-23ac-40f1-a16a-610678109b99.png?x-oss-process=image%2Fformat%2Cwebp)
+
+
+
+
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/21910142/1669629369088-274f65fe-8ee3-4a76-a1a7-7a9b1c6575b9.png?x-oss-process=image%2Fformat%2Cwebp)
+
+
+
+
+
+
+
+## 工作原理
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/21910142/1668738168302-58b3f706-d5fc-49a3-b41e-d8eb17d1064b.png?x-oss-process=image%2Fformat%2Cwebp%2Fresize%2Cw_750%2Climit_0)
+
+
+
+比较 Terraform 与其他 IaC 工具 (如 Ansible, Puppet, Chef)
+
+Terraform 侧重于基础设施的编排和资源的生命周期管理。它以声明式的方式定义基础设施的最终状态，通过 Provider 与各种云服务和数据中心 API 交互，能够跨多个云平台和数据中心创建、修改和版本化基础设施。
+
+Ansible强调简单性和易用性，采用基于推送（Push）的模型。它使用 SSH 协议直接连接到目标主机，通过编写 Playbook（剧本）来定义一系列任务，实现服务器配置管理、应用部署和任务自动化。
+
+
+
+## 安装Terraform
+
+官网链接：https://www.terraform.io/
+
+![image-20250210211952240](C:%5CUsers%5CAdministrator%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20250210211952240.png)
+
+```bash
+sudo yum install -y yum-utils
+sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
+sudo yum -y install terraform
+
+# 检查安装
+terraform -v   
+```
+
+
+
+### 快速编写
+
+```yaml
+#定义云厂商
+provider "alicloud" {
+  region     = "cn-shanghai"
+  access_key = "LTAIxxxxxxxxxxxxxxxxx"   #修改成自己的ak
+  secret_key = "hmbkxxxxxxxxxxxxxxxxxxxxxxxxx"  #修改成自己的sk
+}
+
+#创建vpc
+resource "alicloud_vpc" "vpc" {
+  vpc_name   = "vpc_1"
+  cidr_block = "10.0.0.0/16"
+}
+
+# 创建vswitch
+# alicloud_vswitch是阿里云的资源字段，vsw_1字段是tf文件中的自定义唯一资源名称,vswitch_name字段是在阿里云上的自定义备注名
+resource "alicloud_vswitch" "vsw_1" {
+  vswitch_name = "vsw_aliyun1"
+  vpc_id       = alicloud_vpc.vpc.id
+  cidr_block   = "10.0.0.0/24"
+  zone_id      = "cn-shanghai-b"
+}
+
+#新建安全组
+resource "alicloud_security_group" "nsg1" {
+  name   = "lyc_aliyun_nsg1"
+  vpc_id = alicloud_vpc.vpc.id
+}
+
+#将nsg_rule1、nsg_rule2加入安全组lyc_aliyun_nsg1中
+resource "alicloud_security_group_rule" "nsg_rule1" {
+  type              = "ingress"
+  ip_protocol       = "tcp"
+  nic_type          = "intranet"
+  policy            = "accept"
+  port_range        = "1/65535"
+  priority          = 1
+  security_group_id = alicloud_security_group.nsg1.id
+  cidr_ip           = "0.0.0.0/0"
+}
+
+
+#创建ECS实例
+resource "alicloud_instance" "instance" {
+  # cn-shanghai
+  availability_zone          = "cn-shanghai-b"
+  security_groups            = ["${alicloud_security_group.nsg1.id}"]
+  instance_type              = "ecs.n1.small"
+  system_disk_category       = "cloud_ssd"
+  image_id                   = "centos_7_9_x64_20G_alibase_20220824.vhd"
+  instance_name              = "lyc-kevin"
+  vswitch_id                 = alicloud_vswitch.vsw_1.id
+  internet_max_bandwidth_out = 1
+  password                   = "5jejYWzSjZhWQc7G22"
+}
+```
+
+
+
+
+
+### **Terraform 的工作流程**
+
+1. **编写配置文件**
+   - 使用 HCL 或 JSON 定义基础设施的期望状态。
+2. **初始化（Init）**
+   - 运行 `terraform init` 初始化工作目录，下载所需的 Provider 和模块。
+3. **计划（Plan）**
+   - 运行 `terraform plan` 生成执行计划，显示 Terraform 将进行的更改。
+4. **应用（Apply）**
+   - 运行 `terraform apply` 应用更改，创建或更新基础设施。
+5. **销毁（Destroy）**
+   - 运行 `terraform destroy` 销毁所有由 Terraform 管理的资源。
+
+
+
+
+
+
+
+###  Terraform 常用命令
+
+| 命令                   | 用途                 |
+| ---------------------- | -------------------- |
+| `terraform init`       | 初始化工作目录       |
+| `terraform plan`       | 生成执行计划         |
+| `terraform apply`      | 应用更改             |
+| `terraform destroy`    | 销毁资源             |
+| `terraform validate`   | 验证配置文件         |
+| `terraform show`       | 显示状态文件内容     |
+| `terraform state list` | 列出状态文件中的资源 |
+| `terraform import`     | 导入现有资源         |
+| `terraform workspace`  | 管理工作区           |
+| `terraform output`     | 显示输出变量         |
+| `terraform fmt`        | 格式化配置文件       |
+| `terraform get`        | 下载模块             |
+| `terraform refresh`    | 刷新状态文件         |
+| `terraform taint`      | 标记资源为“受污染”   |
+| `terraform console`    | 启动交互式控制台     |
+
+
+
+### terraform init 
+
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/21910142/1668077847726-20b030a9-6234-4ebb-8760-bd4e1e034836.png?x-oss-process=image%2Fformat%2Cwebp)
+
+###  terraform plan
+
+![img](https://cdn.nlark.com/yuque/0/2022/png/21910142/1668078050286-92dcf368-7145-4aa7-8986-880c02efd873.png)
+
+
+
+执行计划，`terraform apply`。查看无误后，键入`yes`开始执行。
+
+
+
+
+
