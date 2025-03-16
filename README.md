@@ -12,6 +12,12 @@
 
 3.搭建docker私有仓库。
 
+#### Ansible
+
+ansilbe 模块与剧本
+
+ansible部署K8s集群
+
 #### K8S   容器资源编排
 
 1. 理解了k8S最基本的单位pod   认识生命周期与调度策略
