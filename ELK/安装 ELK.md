@@ -9,7 +9,7 @@
 0. **默认已安装JDK环境**
 
 1. **导入 Elasticsearch 的 GPG 密钥**
-    
+   
     ```bash
     wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo gpg --dearmor -o /usr/share/keyrings/elasticsearch-keyring.gpg
     ```
@@ -65,23 +65,25 @@
     
 8. **验证端口及监听地址 netstat -ntpl**
 
-    ![img](file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml11548\wps1.jpg) 
+    ![image-20250311224805006](%E5%AE%89%E8%A3%85%20ELK.assets/image-20250311224805006-1742119773142.png)
 
     **通过浏览器访问ES**
 
-    ![img](file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml11548\wps2.jpg) 
+    
 
     
 
 ### 安装 Kibana
 1. **安装 Kibana**
+    
     ```bash
     sudo apt-get install kibana
     ```
-    执行该命令安装 Kibana。
-
+执行该命令安装 Kibana。
+    
 2. **配置 Kibana**
     编辑 `/etc/kibana/kibana.yml` 文件，配置如下：
+    
     ```yaml
     server.host: "0.0.0.0"
     elasticsearch.hosts: ["https://localhost:9200"]
@@ -90,8 +92,8 @@
     ```
     - `server.host`：设置 Kibana 监听的网络地址，`0.0.0.0` 表示监听所有可用的网络接口。
     
-    - `elasticsearch.hosts`：指定 Elasticsearch 的地址。
-
+- `elasticsearch.hosts`：指定 Elasticsearch 的地址。
+    
     - `elasticsearch.username` 和 `elasticsearch.password`：设置连接 Elasticsearch 的用户名和密码，`kibana_system` 是 Kibana 连接 Elasticsearch 的默认用户。
     
       

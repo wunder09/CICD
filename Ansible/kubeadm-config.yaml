@@ -1,0 +1,14 @@
+apiVersion: kubeadm.k8s.io/v1beta3
+kind: InitConfiguration
+localAPIEndpoint:
+  advertiseAddress: 192.168.0.110  # 替换为 Master 节点的 IP 地址
+  bindPort: 6443
+nodeRegistration:
+  criSocket: unix:///var/run/containerd/containerd.sock  # 如果使用 Docker，替换为 `unix:///var/run/docker.sock`
+---
+apiVersion: kubeadm.k8s.io/v1beta3
+kind: ClusterConfiguration
+kubernetesVersion: v1.28.2  # 指定 Kubernetes 版本
+networking:
+  podSubnet: 10.244.0.0/16  # 指定 Pod 网络 CIDR
+imageRepository: registry.aliyuncs.com/google_containers  # 使用阿里云的镜像仓库
