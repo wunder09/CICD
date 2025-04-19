@@ -15,13 +15,24 @@
 #### K8S   容器资源编排
 
 0. 常用命令 &  遇到的问题
-
 1. 理解了k8S最基本的单位pod   认识生命周期与调度策略
 2. 如何管理pod？  -- pod控制器
 3. K8S 如何进行数据存储？
 4. Service资源： 容器的端口服务。
 5. ingress 外部访问集群的api对象
 6. 理解HPA 
+
+##### 其他内容
+
+sealos搭建k8s集群    （大规模）
+
+总结了常用的kubectl命令
+
+遇到的一些问题及解决方法
+
+快速生成kubernetes-yaml文件----yaml生成器
+
+YAML名词解释
 
 #### Prometheus  监控系统
 
@@ -69,3 +80,6 @@ jenkins 的安装与部署。
 
 与GitlabCI 比较如何？
 
+#### istio
+
+安装istio
