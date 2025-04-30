@@ -148,13 +148,9 @@ docker run -d --name tutorial -p 8000:80 nginx
 
 
 
-
-
 ![image-20250322230349250](Terraform%20&%20docker.assets/image-20250322230349250.png)
 
 ![image-20250322230922351](Terraform%20&%20docker.assets/image-20250322230922351.png)
-
-
 
 
 

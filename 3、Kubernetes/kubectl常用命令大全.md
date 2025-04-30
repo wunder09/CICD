@@ -144,7 +144,7 @@ $ kubectl set resources deployment nginx --limits=cpu=0,memory=0 --requests=cpu=
 
 ### kubectl set image 命令
 
-​用于更新现有资源的容器镜像。
+用于更新现有资源的容器镜像。
 
 可用资源对象包括：`pod (po)`、`replicationcontroller (rc)`、`deployment (deploy)`、`daemonset (ds)`、`job`、`replicaset (rs)`。
 
@@ -275,7 +275,7 @@ $ echo "if [ $commands[kubectl] ]; then source <(kubectl completion zsh); fi" >>
 * `history`（查看历史版本）
 * `pause`（暂停资源）
 * `resume`（恢复暂停资源）
-* `status`（查看资源状态）
+  * `status`（查看资源状态） 
 * `undo`（回滚版本）
 
 ```bash
@@ -382,7 +382,7 @@ $ kubectl top pod --all-namespaces
 
 ```bash
 # 查看my-nginx pod的详细状态
-$ kubectl describe po my-nginx
+$ kubectl describe pod my-nginx
 ```
 
 **logs命令**：用于在一个pod中打印一个容器的日志，如果pod中只有一个容器，可以省略容器名

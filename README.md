@@ -4,7 +4,7 @@
 
 使用云资源搭建CICD实现项目的自动化构建，测试，部署，监控。
 
-#### Docker  容器技术
+## Docker  容器技术
 
 1.整理了常用的docker命令。
 
@@ -12,7 +12,9 @@
 
 3.搭建docker私有仓库。
 
-#### K8S   容器资源编排
+
+
+## K8S   容器资源编排
 
 0. 常用命令 &  遇到的问题
 1. 理解了k8S最基本的单位pod   认识生命周期与调度策略
@@ -24,29 +26,34 @@
 
 ##### 其他内容
 
-sealos搭建k8s集群    （大规模）
+1. sealos搭建k8s集群    （大规模）
 
-总结了常用的kubectl命令
+2. 总结了常用的kubectl命令
 
-遇到的一些问题及解决方法
+3. 遇到的一些问题及解决方法
 
-快速生成kubernetes-yaml文件----yaml生成器
+4. 快速生成kubernetes-yaml文件----yaml生成器
 
-YAML名词解释
+5. YAML名词解释
+6. pod故障归类与排查 & 生命周期
+7. 
 
-#### Prometheus  监控系统
+## Prometheus  监控系统
 
 1. Prometheus 的安装与监控节点。
 2. 如何用Grafana 显示所监控的数据？
 3. Prometheus  进阶用法
 
-#### ELK 日志分析
+## ELK 日志分析
 
-1.  ELK的简介。
+1. ELK的简介。
+
 2. 安装ELK以及配置ES集群。
 
+   
 
-#### Terraform   云资源编排
+
+## Terraform   云资源编排
 
 1.介绍了IAC，了解基础设施即代码的意义
 
@@ -60,19 +67,29 @@ YAML名词解释
 
  5.使用terraform操作docker以及比较。
 
-#### Gitlab   代码托管
+
+
+## Gitlab   代码托管
 
 1. 了解代码托管和协作平台Gitlab。
+
 2. Gitlab runner   运行 CI/CD 作业的代理。
+
 3. 阿里云ECS 配置ECS 。
 
-#### SonarQube   代码质量检查
+   
+
+## SonarQube   代码质量检查
 
 1. 介绍了SonarQube 的核心功能：代码质量分析
+
 2. 如何安装与配置SonarQube.
+
 3. SonarQube 与CI/CD 工具集成。
 
-#### jenkins   广泛使用的CICD工具
+   
+
+## jenkins   广泛使用的CICD工具
 
 jenkins 的安装与部署。
 
@@ -80,6 +97,6 @@ jenkins 的安装与部署。
 
 与GitlabCI 比较如何？
 
-#### istio
+## istio
 
 安装istio

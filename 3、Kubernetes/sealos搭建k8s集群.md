@@ -83,6 +83,16 @@ kubectl get nodes
 
 
 
+## 镜像加速器
+
+补充：阿里云提供了docker 与Containerd的镜像加速。
+
+[配置镜像加速器_容器镜像服务(ACR)-阿里云帮助中心](https://help.aliyun.com/zh/acr/user-guide/accelerate-the-pulls-of-docker-official-images?spm=5176.21213303.J_v8LsmxMG6alneH-O7TCPa.1.4f352f3dXPspWJ&scm=20140722.S_help@@文档@@60750._.ID_help@@文档@@60750-RL_镜像加速器-LOC_2024SPAllResult-OR_ser-PAR1_2150459b17456608116728445e57e3-V_4-RE_new5-P0_0-P1_0#4766fe99e4g5f)
+
+留下链接 不在赘述。
+
+
+
 ## 可选组件安装
 
 ### 安装网络插件（如果未自动安装）
