@@ -1,8 +1,28 @@
 # README
 
-介绍了一些Devops 常用的技术。
+介绍了Devops 的技术栈。
 
-使用云资源搭建CICD实现项目的自动化构建，测试，部署，监控。
+并使用云资源搭建CICD实现项目的自动化构建，测试，部署，监控。
+
+
+
+## 项目概述
+
+搭建一个CICD平台，能够部署云原生应用（如微服务电商系统），包含以下能力：
+
+- **技术栈**：
+  - 前端：React + Nginx
+  - 后端：java
+  - 数据库：PostgreSQL
+  - 消息队列：RabbitMQ/AWS SQS
+- **DevOps 要求**：
+  1. **CI/CD**：代码提交后自动构建镜像，部署到 Kubernetes。
+  2. **监控**：Prometheus 采集应用指标，Grafana 展示。
+  3. **日志**：EFK 集中管理日志，报警异常请求。
+  4. **基础设施**：Terraform 管理云资源，Ansible 配置中间件。
+  5. **高可用**：多副本部署 + 自动扩缩容（HPA）。
+
+
 
 ## Docker  容器技术
 
@@ -91,7 +111,7 @@
 
    
 
-## jenkins   广泛使用的CICD工具
+## Jenkins   广泛使用的CICD工具
 
 1. jenkins 的安装与部署。
 
