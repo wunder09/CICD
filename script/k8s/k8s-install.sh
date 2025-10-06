@@ -1,8 +1,6 @@
 #!/bin/bash
 
 # Kubernetes单节点安装脚本 - Alibaba Cloud Linux 3
-# 作者：AI助手
-# 日期：2025-09-13
 
 set -e
 
