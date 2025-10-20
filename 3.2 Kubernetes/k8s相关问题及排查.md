@@ -60,9 +60,8 @@
 - CNI 网络组件（flannel，calico）组件是否有问题；
 - kube-proxy 组件是否正常；
 - 是否已经创建相关 iptables 规则或 ipvs 路由；
-- **附：**Service 工作流程图：
 
-![图片](C:%5CUsers%5CAdministrator%5CDesktop%5CCICD%5CKubernetes%5Cimg%5C1231.jpg)
+  
 
 #### 10. Pod 启动后立即终止或 CrashLoopBackOff 状态：
 - 使用 `kubectl get pods -n <namespace>` 命令检查 Pod 的状态和事件，查看是否有任何错误或警告信息。

@@ -1,4 +1,4 @@
-# 申请aliyunECS
+# Aliyun-ECS
 
 这是一个完整实例，用terraform申请阿里云服务器。以及遇到的问题及解决方法。
 

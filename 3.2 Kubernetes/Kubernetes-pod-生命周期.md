@@ -12,8 +12,6 @@ Succeeded | Pod 中的所有容器都被成功终止，并且不会再重启。
 Failed | Pod 中的所有容器都已终止了，并且至少有一个容器是因为失败终止。也就是说，容器以非0状态退出或者被系统终止。
 Unknown | 因为某些原因无法取得 Pod 的状态，通常是因为与 Pod 所在主机通信失败。
 
-![](../../CICD/Kubernetes/img/pod-phase.png)
-
 ## Pod 状态
 
 Pod 有一个 `PodStatus` 对象，其中包含一个 [PodCondition](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.17/#podcondition-v1-core) 数组，代表 Condition 是否通过。
@@ -38,8 +36,6 @@ Ready | Pod 能够提供请求，应该被添加到负载均衡池中以提供�
 Initialized | 所有 [init containers](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) 成功启动
 Unschedulable | 调度器不能正常调度容器，例如缺乏资源或其他限制
 ContainersReady | Pod 中所有容器全部就绪
-
-![](../../CICD/Kubernetes/img/pod-conditions.png)
 
 ## Pod 重启策略
 

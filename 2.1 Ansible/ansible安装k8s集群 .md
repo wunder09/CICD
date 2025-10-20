@@ -273,14 +273,6 @@ error execution phase preflight: [preflight] Some fatal errors occurred:
 
 
 
-
-
-<img src="C:%5CUsers%5CAdministrator%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20250315222409106.png" alt="image-20250315222409106" style="zoom:50%;" />
-
-
-
-在install kubernetes components步骤报错
-
 #### 缺少配置文件
 
 `kubeadm-config.yaml` 是一个自定义的配置文件，用于在初始化 Kubernetes 集群时指定配置参数。

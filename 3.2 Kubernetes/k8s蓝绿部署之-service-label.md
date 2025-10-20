@@ -1,9 +1,6 @@
 ## 什么是蓝绿部署
 `蓝绿(blue/green)`：新版本与旧版本一起存在，然后切换流量
 
-## 蓝绿部署流程图
-![](../../CICD/3%E3%80%81Kubernetes/img/blue-green-deploy.png)
-
 ## K8S中如何实现蓝绿部署
 - 通过`k8s service label`标签来实现蓝绿发布
 - 通过`Ingress 控制器`来实现蓝绿发布

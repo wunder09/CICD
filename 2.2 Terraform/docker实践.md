@@ -148,29 +148,7 @@ docker run -d --name tutorial -p 8000:80 nginx
 
 
 
-![image-20250322230349250](Terraform%20&%20docker.assets/image-20250322230349250.png)
-
-![image-20250322230922351](Terraform%20&%20docker.assets/image-20250322230922351.png)
-
-
-
-修改资源并apply
-
-![image-20250322231355276](Terraform%20&%20docker.assets/image-20250322231355276.png)
-
-
-
-摧毁
-
-
-
-![image-20250322231802195](Terraform%20&%20docker.assets/image-20250322231802195.png![image-20250322231822975](Terraform%20&%20docker.assets/image-20250322231822975.png)
-
-
-
-
-
-# 定义输入变量
+### 定义输入变量
 
 创建一个名为 with a block 定义新变量的新文件。variables.tf
 

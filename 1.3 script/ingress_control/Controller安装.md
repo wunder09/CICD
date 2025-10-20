@@ -1,13 +1,12 @@
-# Nginx Ingress Controller 安装总结
+# Nginx Ingress Controller 安装
 
 ## ✅ 安装状态
-
-**🎉 Nginx Ingress Controller 已成功安装并运行！**
 
 - **版本**: nginx-ingress-controller:v1.8.1
 - **镜像源**: 阿里云国内镜像 (registry.cn-hangzhou.aliyuncs.com)
 - **部署状态**: 正常运行
 - **访问方式**: NodePort
+- **建议使用**：simple-cn 脚本
 
 ## 📋 安装详情
 
@@ -160,6 +159,3 @@ kubectl get configmap ingress-nginx-controller -n ingress-nginx -o yaml
 - 测试应用: ingress-test-app.sh
 - 测试配置: `test-ingress-app.yaml`
 
----
-
-**✅ Nginx Ingress Controller 已成功安装并可以使用！**

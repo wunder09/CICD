@@ -1,0 +1,64 @@
+version: '3'
+
+services:
+  loki:
+    image: grafana/loki:2.8.0
+    container_name: loki
+    ports:
+      - "3100:3100"
+    volumes:
+      - loki_data:/loki/data
+      - /opt/loki/config/loki-config.yml:/etc/loki/local-config.yml:ro
+    restart: unless-stopped
+    networks:
+      - loki-net
+
+  promtail:
+    image: grafana/promtail:2.8.0
+    container_name: promtail
+    volumes:
+      - /opt/loki/config/promtail-config.yml:/etc/promtail/config.yml:ro
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /opt/logs:/opt/logs:ro
+      - /var/log:/var/log:ro
+      - /var/log/containers:/var/log/containers:ro
+      - /var/log/pods:/var/log/pods:ro
+      - /etc/kubernetes:/etc/kubernetes:ro
+    command: -config.file=/etc/promtail/config.yml
+    restart: unless-stopped
+    networks:
+      - loki-net
+
+  grafana:
+    image: grafana/grafana:9.1.6
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana
+    restart: unless-stopped
+    networks:
+      - loki-net
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_USERS_ALLOW_SIGN_UP=false
+
+volumes:
+  loki_data:
+    driver: local
+    driver_opts:
+      o: bind
+      device: /opt/loki/data
+      type: none
+  grafana_data:
+    driver: local
+    driver_opts:
+      o: bind
+      device: /opt/loki/grafana-data
+      type: none
+
+networks:
+  loki-net:
+    driver: bridge

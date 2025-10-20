@@ -1,0 +1,71 @@
+server:
+  http_listen_port: 9080
+  grpc_listen_port: 0
+
+positions:
+  filename: /tmp/positions.yaml
+
+clients:
+  - url: http://loki:3100/loki/api/v1/push
+
+scrape_configs:
+  - job_name: docker
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: docker
+          __path__: /var/lib/docker/containers/*/*log
+    pipeline_stages:
+      - docker:
+      - json:
+          expressions:
+            log:
+            stream:
+            time:
+      - timestamp:
+          source: time
+          format: RFC3339
+      - labels:
+          stream:
+
+  - job_name: system
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: varlogs
+          __path__: /var/log/*log
+
+  - job_name: app-logs
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: app-logs
+          __path__: /opt/logs/*/*log
+
+  - job_name: kubernetes-pods
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: kubernetes-pods
+          __path__: /var/log/pods/*/*/*.log
+    pipeline_stages:
+      - json:
+          expressions:
+            log:
+            stream:
+            time:
+      - timestamp:
+          source: time
+          format: RFC3339Nano
+      - regex:
+          expression: '^\/var\/log\/pods\/(?P<namespace>[^_]+)_(?P<pod>[^_]+)_(?P<uid>[^\/]+)\/(?P<container>[^\/]+)\/'
+          source: __path__
+      - labels:
+          namespace:
+          pod:
+          container:
+          stream:
